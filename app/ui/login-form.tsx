@@ -1,8 +1,5 @@
 'use client';
-
 import { sing_gogel } from './actions';
-
-
 export default function LoginForm() {
  
   return (

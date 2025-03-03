@@ -30,15 +30,7 @@ export default function Voice({ username_get }: { username_get: string }) {
   const [isMuted, setIsMuted] = useState(true);
   const [isVideoOn, setIsVideoOn] = useState(true);
   const [fromcall, setfromcall] = useState<string>("");
-  const handleLoadedMetadata = () => {
-    if (video) {
-      const totalSeconds = Math.floor(video.duration); // الحصول على المدة بالثواني
-      const minutes = Math.floor(totalSeconds / 60); // تحويل الثواني إلى دقائق
-      const seconds = totalSeconds % 60; // الثواني المتبقية
-      const formattedTime = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`; // تنسيق الوقت
-  // تحديث الحالة
-    }
-  };
+
   const accesstomedia =()=>{
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices
@@ -298,9 +290,7 @@ export default function Voice({ username_get }: { username_get: string }) {
       
        setIncomingCall(null);
       stopRingtone();// إيقاف الصوت عند قبول المكالمة
-      if(video){
-        video.addEventListener("loadedmetadata", handleLoadedMetadata);
-        }
+    
     }
   };
 
