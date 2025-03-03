@@ -11,7 +11,7 @@ export default function Home() {
             href="/login"
             className="flex items-center gap-5 self-start rounded-lg bg-blue-400 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-500 md:text-base"
           >
-             <span>تسجيل الدخول</span>
+             <span>تسجيل hjhjkh</span>
             <ArrowRightIcon className="w-5 md:w-6" />
           </Link>
         </main>
