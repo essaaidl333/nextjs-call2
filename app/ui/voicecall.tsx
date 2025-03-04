@@ -53,8 +53,8 @@ export default function Voice({ username_get }: { username_get: string }) {
   }}
   useEffect(() => {
     
-   alert(`${window.location.protocol === "https:" ? "wss" : "ws"}://${window.location.host}`);
-    socketRef.current = io(`${window.location.protocol === "https:" ? "wss" : "ws"}://${window.location.host}`);
+  //  alert(`${window.location.protocol === "https:" ? "wss" : "ws"}://${window.location.host}`);
+    socketRef.current = io("https://nodesocket-40y8.onrender.com");
     socketRef.current.emit("register", username_get);
     console.log(`Registered as ${username_get}`);
    
