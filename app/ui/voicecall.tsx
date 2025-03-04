@@ -54,7 +54,7 @@ export default function Voice({ username_get }: { username_get: string }) {
   useEffect(() => {
     
 
-    socketRef.current = io(`${window.location.protocol === "https:" ? "wss" : "ws"}://${window.location.host}`);
+    socketRef.current = io("https://nextjs-call2.vercel.app");
     socketRef.current.emit("register", username_get);
     console.log(`Registered as ${username_get}`);
    
