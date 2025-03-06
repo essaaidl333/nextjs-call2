@@ -53,7 +53,7 @@ export default function Voice({ username_get }: { username_get: string }) {
   useEffect(() => {
     
   //  alert(`${window.location.protocol === "https:" ? "wss" : "ws"}://${window.location.host}`);
-   socketRef.current  = io("http://localhost:3001", {
+   socketRef.current  = io("https://nodesocket-40y8.onrender.com", {
     transports: ["websocket"], // استخدم WebSocket فقط
   });
   
