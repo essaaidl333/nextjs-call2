@@ -1,10 +1,10 @@
-// "use server";
-// import { signIn } from "@/auth";
+"use server";
+import { signIn } from "@/auth";
 
 
 
-// export async function sing_gogel() {
-//   await signIn("google", { redirectTo: "/dashboard" });
-// }
+export async function sing_gogel() {
+  await signIn("google", { redirectTo: "/dashboard" });
+}
 
 
