@@ -331,7 +331,22 @@ export default function Voice({ username_get }: { username_get: string }) {
           username: "9cba688aa082b8e8f4b67294",
           credential: "6ciMJec/WcPpRrYb",
         },
-      ],
+        {
+          urls: "turn:global.relay.metered.ca:80?transport=tcp",
+          username: "9cba688aa082b8e8f4b67294",
+          credential: "6ciMJec/WcPpRrYb",
+        },
+        {
+          urls: "turn:global.relay.metered.ca:443",
+          username: "9cba688aa082b8e8f4b67294",
+          credential: "6ciMJec/WcPpRrYb",
+        },
+        {
+          urls: "turns:global.relay.metered.ca:443?transport=tcp",
+          username: "9cba688aa082b8e8f4b67294",
+          credential: "6ciMJec/WcPpRrYb",
+        },
+    ],
     });
 
     pc.onicecandidate = (event) => {
