@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 // تعيين العنصر الجذر للدايلوج (مطلوب لـ react-modal)
 Modal.setAppElement('body');
 
-export default function Voice({ username_get }: { username_get: string }) {
+export default function Voice( { username_get }:{username_get :string}) {
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [incomingCall, setIncomingCall] = useState<{ caller: string; offer: RTCSessionDescriptionInit } | null>(null);
   const [targetUser, setTargetUser] = useState<string>("");
@@ -22,6 +22,7 @@ export default function Voice({ username_get }: { username_get: string }) {
   const peerConnection = useRef<RTCPeerConnection | null>(null);
   const socketRef = useRef<Socket | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
+//  const [username_get,setuserget] = useState<string>("");
 
   const [ringtoneInterval,settime]= useState<NodeJS.Timeout| null>(null);
 
@@ -51,9 +52,12 @@ export default function Voice({ username_get }: { username_get: string }) {
       alert("getUserMedia is not supported in your browser.");
   }}
   useEffect(() => {
-    
+    // const us =prompt("أدخل اسم المستخدم:");
+    // if(us)
+    //  setuserget(us);
+     console.log(username_get);
   //  alert(`${window.location.protocol === "https:" ? "wss" : "ws"}://${window.location.host}`);
-   socketRef.current  = io("https://localhostessa.giize.com:3001", {
+   socketRef.current  = io("https://nodesocket-40y8.onrender.com", {
     transports: ["websocket"], // استخدم WebSocket فقط
   });
   
@@ -65,7 +69,7 @@ export default function Voice({ username_get }: { username_get: string }) {
    
     
     // Access user media (audio and video)
-    if(!isopenAnswer){
+    
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices
         .getUserMedia({ audio: true, video: true })
@@ -85,7 +89,7 @@ export default function Voice({ username_get }: { username_get: string }) {
       console.error("getUserMedia is not supported in this browser.");
       alert("getUserMedia is not supported in your browser.");
     }
-    }
+    
 
     // Socket event listeners
     const socket = socketRef.current;
@@ -532,7 +536,7 @@ export default function Voice({ username_get }: { username_get: string }) {
         
           <div className="flex flex-col items-center">
           <video ref={localVideoRef} autoPlay muted style={{ width: "100%", height: "auto" }} />
-          <video ref={remoteVideoRef} autoPlay  style={{ width: "100%", height: "auto" }} />
+          <video ref={remoteVideoRef} autoPlay   style={{ width: "100%", height: "auto" }} />
             
             
             <div className="flex justify-around w-full mt-4">

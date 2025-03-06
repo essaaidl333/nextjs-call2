@@ -8,7 +8,7 @@ export default function Home() {
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         
       <Link
-            href="/login"
+            href="/dashboard"
             className="flex items-center gap-5 self-start rounded-lg bg-blue-400 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-500 md:text-base"
           >
              <span>تسجيل hjhjkh</span>

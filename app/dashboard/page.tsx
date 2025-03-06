@@ -4,7 +4,7 @@ import React from 'react';
 import Voice from '@/app/ui/voicecall';
 import Test from '@/app/ui/t';
 
-import { auth } from '@/auth';
+// import { auth } from '@/auth';
 export default async function VoiceCallPage() {
   const session = await auth();
       const useremail = session?.user?.email;
