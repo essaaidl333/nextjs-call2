@@ -75,14 +75,14 @@ export default function Voice({ username_get1 }) {
   };
 
   useEffect(() => {
-    const us = prompt("أدخل اسم المستخدم:");
-    if (us) setuserget(us);
-    console.log(username_get);
+    // const us = prompt("أدخل اسم المستخدم:");
+    // if (us) setuserget(us);
+    // console.log(username_get);
 
     socket= io("https://nodesocket-40y8.onrender.com", {
       transports: ["websocket"], // استخدم WebSocket فقط
     });
-    socket.emit("register", us);
+    socket.emit("register", username_get1);
 
     accesstomedia();
 
