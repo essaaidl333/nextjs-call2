@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 // تعيين العنصر الجذر للدايلوج (مطلوب لـ react-modal)
 Modal.setAppElement('body');
 
-export default function Voice( { username_get }:{username_get :string}) {
+export default function Voice( { username_get1 }:{username_get1 :string}) {
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [incomingCall, setIncomingCall] = useState<{ caller: string; offer: RTCSessionDescriptionInit } | null>(null);
   const [targetUser, setTargetUser] = useState<string>("");
@@ -22,7 +22,7 @@ export default function Voice( { username_get }:{username_get :string}) {
   const peerConnection = useRef<RTCPeerConnection | null>(null);
   const socketRef = useRef<Socket | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
-//  const [username_get,setuserget] = useState<string>("");
+ const [username_get,setuserget] = useState<string>("");
 
   const [ringtoneInterval,settime]= useState<NodeJS.Timeout| null>(null);
 
@@ -52,9 +52,9 @@ export default function Voice( { username_get }:{username_get :string}) {
       alert("getUserMedia is not supported in your browser.");
   }}
   useEffect(() => {
-    // const us =prompt("أدخل اسم المستخدم:");
-    // if(us)
-    //  setuserget(us);
+    const us =prompt("أدخل اسم المستخدم:");
+    if(us)
+     setuserget(us);
      console.log(username_get);
   //  alert(`${window.location.protocol === "https:" ? "wss" : "ws"}://${window.location.host}`);
    socketRef.current  = io("https://nodesocket-40y8.onrender.com", {
@@ -64,7 +64,7 @@ export default function Voice( { username_get }:{username_get :string}) {
     // socketRef.current = io("https://nodesocket-40y8.onrender.com");
     // socketRef.current = io("http://localhost:3001");
     // socketRef.current=soo;
-    socketRef.current.emit("register", username_get);
+    socketRef.current.emit("register", us);
     // console.log(`Registered as ${username_get}`);
    
     
