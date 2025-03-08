@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 
 let socket;
 Modal.setAppElement('body');
-
+let mediaStream; 
 export default function Voice({ username_get1 }) {
   const [stream, setStream] = useState(null);
   const [incomingCall, setIncomingCall] = useState(null);
@@ -53,7 +53,7 @@ export default function Voice({ username_get1 }) {
     // رسالة تأكيد (اختياري)
     event.returnValue = "هل أنت متأكد أنك تريد تحديث الصفحة؟ سيتم إغلاق الاتصال.";
   };
-  const accesstomedia = () => {
+  const accesstomedia =  () => {
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices
         .getUserMedia({ audio: true, video: true })
@@ -73,7 +73,7 @@ export default function Voice({ username_get1 }) {
       alert("getUserMedia is not supported in your browser.");
     }
   };
-
+ 
   useEffect(() => {
     // const us = prompt("أدخل اسم المستخدم:");
     // if (us) setuserget(us);
@@ -108,8 +108,20 @@ export default function Voice({ username_get1 }) {
     //   // رسالة تأكيد (اختياري)
     //   event.returnValue = "هل أنت متأكد أنك تريد تحديث الصفحة؟ سيتم إغلاق الاتصال.";
     // };
+    const handlePageLeave = () => {
+      
+        window.location.reload();
+    }
+    window.addEventListener("pagehide", handlePageLeave);
     window.addEventListener("beforeunload", handleBeforeUnload);
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "hidden") {
+        handlePageLeave();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
     return () => {
+      handlePageLeave();
       if (socket) socket.disconnect();
       if (stream) {
         stream.getTracks().forEach((track) => track.stop());
@@ -119,6 +131,8 @@ export default function Voice({ username_get1 }) {
       }
       stopRingtone();
       window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("beforeunload", handlePageLeave);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       if (socket) {
         if (fromcall !== "") {
           socket.emit("end-call", { targetUser: fromcall });
@@ -177,8 +191,9 @@ export default function Voice({ username_get1 }) {
     alert('تم انهاء المكالمة');
   };
 
-  const handleIncomingCall = ({ caller, offer }) => {
-    accesstomedia();
+  const handleIncomingCall = async ({ caller, offer }) => {
+    // accesstomedia();
+    
     setIncomingCall({ caller, offer });
     setIsModalOpen(true);
     playIphoneLikeRingtone();
@@ -191,6 +206,7 @@ export default function Voice({ username_get1 }) {
   };
 
   const handleCallAccepted = async ({ answer }) => {
+   // accesstomedia();
     if (peerConnection.current) {
       console.log("Call accepted, setting remote description:", answer);
       await peerConnection.current.setRemoteDescription(new RTCSessionDescription(answer))
@@ -227,10 +243,13 @@ export default function Voice({ username_get1 }) {
         });
     }
   };
-
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const startCall = async () => {
+
+     accesstomedia(); 
+     
     setOpenAnswer(true);
-    accesstomedia();
+    
     playIphoneLikeRingtone();
     if (!targetUser) {
       alert("الرجاء ادخل ايميل الشخص الذي تريد الاتصال به");
@@ -259,9 +278,11 @@ export default function Voice({ username_get1 }) {
   };
 
   const acceptCall = async () => {
+    accesstomedia();
+   
     setIsModalOpen(false);
     setOpenAnswer(true);
-    accesstomedia();
+  
     if (incomingCall && !peerConnection.current) {
       console.log("Accepting call from:", incomingCall.caller);
       setfromcall(incomingCall.caller);
